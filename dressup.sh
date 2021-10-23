@@ -7,6 +7,6 @@ fi
 
 cp ./dir_Girls/**/*.rs $DIR_VALKYRIES/.
 
-cp ./dir_Modules/mod.rs $DIR_VALKYRIES/.
+cp ./dir_Modules/valkyries.rs $1/.
 
 echo Completed!
