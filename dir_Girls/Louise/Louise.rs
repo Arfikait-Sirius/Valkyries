@@ -107,4 +107,3 @@ pub fn fn_upper_first( base: String ) -> String {
 pub fn fn_get_length( base: String ) -> usize {
     return base.len() ;
 }
-//
