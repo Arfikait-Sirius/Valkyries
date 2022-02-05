@@ -7,17 +7,7 @@
 //------------------------
 #[allow( dead_code )]
 pub fn fn_count( base: String, target: String ) -> usize {
-    let mut result = 0 ;
-    let mut tmp = base ;
-
-    let mut is_contain = tmp.contains( &target ) ;
-    while is_contain {
-        result += 1 ;
-        tmp = tmp.replacen( &target, "", 1 ) ;
-        is_contain = tmp.contains( &target ) ;
-    }
-
-    return result ;
+    return base.match_indices( &target ).count() ;
 }
 
 //------------------------
@@ -59,6 +49,38 @@ pub fn fn_split( base: String, target: String, index: usize ) -> String {
 
 //------------------------
 // :[ NAME ]:
+//     fn_get_substring
+//
+// :[ CATEGORY ]:
+//     Skill
+//------------------------
+#[allow( dead_code )]
+pub fn fn_get_substring( base: String, format: String ) -> String {
+    let index: usize ;
+    let head_index: usize ;
+    let tail_index: usize ;
+
+    match format.find( "%s" ){
+        Some( v ) => index = v,
+        None => return "".to_string()
+    }
+    let head = &format[..index] ;
+    let tail = &format[( index + 2 )..] ;
+
+    match base.find( &head ){
+        Some( v ) => head_index = v + head.len(),
+        None => return "".to_string()
+    }
+    match base.find( &tail ){
+        Some( v ) => tail_index = v,
+        None => return "".to_string()
+    }
+
+    return ( &base[head_index..tail_index] ).to_string() ;
+}
+
+//------------------------
+// :[ NAME ]:
 //     fn_upper_all
 //
 // :[ CATEGORY ]:
@@ -93,7 +115,7 @@ pub fn fn_upper_first( base: String ) -> String {
     let base_upper = base.to_uppercase() ;
     let base_lower = base.to_lowercase() ;
 
-    return format!( "{}{}", &base_upper[..1], &base_lower[1..base_lower.len()] ) ;
+    return format!( "{}{}", &base_upper[..1], &base_lower[1..] ) ;
 }
 
 //------------------------
